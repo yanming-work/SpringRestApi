@@ -34,5 +34,13 @@
             </list>
         </property>
     </bean>
+    
+  
+    <!-- 控制JSON返回字段 -->
+    <mvc:annotation-driven>  
+        <mvc:return-value-handlers>  
+            <bean class="com.demo.springrest.controller.core.json.JsonReturnHandler"></bean>  
+        </mvc:return-value-handlers>  
+    </mvc:annotation-driven>
  
 </beans>

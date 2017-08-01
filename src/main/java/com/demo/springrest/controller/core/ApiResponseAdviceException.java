@@ -52,10 +52,17 @@ public class ApiResponseAdviceException {
 		  // 记录error级别的信息  
         logger.error(exception); 
         
-		ExceptionCodeMsg exceptionCodeMsg = new ExceptionCodeMsg();
-		exceptionCodeMsg.setCode(-1);
-		exceptionCodeMsg.setMsg(ex.getMessage());
-		exceptionCodeMsg.setException("异常");
+        ExceptionCodeMsg exceptionCodeMsg = new ExceptionCodeMsg();
+        if (ex instanceof org.springframework.web.servlet.NoHandlerFoundException) {
+    		exceptionCodeMsg.setCode(-2);
+    		exceptionCodeMsg.setMsg("请求不存在，请检查");
+    		exceptionCodeMsg.setException(ex.getMessage());
+        }else{
+    		exceptionCodeMsg.setCode(-1);
+    		exceptionCodeMsg.setMsg("异常");
+    		exceptionCodeMsg.setException(ex.getMessage());
+        }
+		
 		return exceptionCodeMsg;
 
 	}

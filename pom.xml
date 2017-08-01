@@ -28,7 +28,13 @@
 
 	<dependencies>
 
-
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		
 		<!-- SPRING start -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -153,6 +159,11 @@
 </dependency>
 
 		
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.6</version>
+</dependency>
 		
 		
 	</dependencies>
