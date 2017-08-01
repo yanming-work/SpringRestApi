@@ -1,9 +1,10 @@
 package com.demo.springrest.controller.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.codehaus.jackson.map.annotate.JsonView;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.springrest.controller.core.ApiReturnObj;
 import com.demo.springrest.controller.core.ErrorCodeMsg;
-import com.demo.springrest.controller.core.json.JSONField;
-import com.demo.springrest.model.Tag;
 import com.demo.springrest.model.User;
 import com.demo.springrest.util.PropertiesUtil;
 
@@ -66,6 +65,7 @@ public class TestController {
 		return a / b;
 	}
 
+	@SuppressWarnings("null")
 	@RequestMapping(value = "/exception", method = RequestMethod.GET)
 	@ResponseBody
 	public String exception() {
@@ -122,5 +122,16 @@ public class TestController {
 
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/map", method = RequestMethod.GET)
+	public Object map() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", "1");
+		map.put("name", "张三");
+		map.put("age", "30");
+		map.put("email", "xxx@xxx.com");
+		return map;
+
+	}
 	
 }

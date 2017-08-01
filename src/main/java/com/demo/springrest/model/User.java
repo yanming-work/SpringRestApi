@@ -6,9 +6,8 @@ public class User {
 	private String name;
 	private String email;
 	private String phone;
-	
-	
 	private String password;
+	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub

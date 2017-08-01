@@ -1,14 +1,19 @@
 package com.demo.springrest.controller.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.demo.springrest.controller.core.ApiReturnObj;
 import com.demo.springrest.controller.core.json.JSONField;
+import com.demo.springrest.controller.core.json.JSONFieldMap;
 import com.demo.springrest.model.Tag;
 import com.demo.springrest.model.User;
 import com.demo.springrest.model.UserTag;
@@ -113,5 +118,89 @@ public class UserController {
 		return userList;
 
 	}
+	
+	
+	
+	// 返回时候不包含 filter 内的 password, id 字段 ,不能有 @ResponseBody
+		@JSONField(type = User.class, filter = "id,password")
+		@RequestMapping(value = "/listcount", method = RequestMethod.GET)
+		public Object listcount(@RequestParam("count") int count)  {
+			if(count<=0){
+				return  new ApiReturnObj(0,"没有查到数据","");
+			}else if(count>1){
+				List<User> userList = new ArrayList<User>();
+				for (int i = 1; i <= count; i++) {
+					User user = new User();
+					user.setId(i);
+					user.setEmail("xxx" + i + "@xxx.com");
+					user.setPhone("1300000000" + i);
+					user.setName("张三" + i);
+					user.setPassword("123456");
+					userList.add(user);
+				}
+				return userList;
+			}else{
+				User user = new User();
+				user.setId(1);
+				user.setEmail("xxx@xxx.com");
+				user.setPhone("13000000001");
+				user.setName("张三");
+				user.setPassword("123456");
+				return user;
+			}
+
+		}
+
+		
+		@JSONFieldMap(type="MAP",include = "name,email")
+		@RequestMapping(value = "/map", method = RequestMethod.GET)
+		public Object map() {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("id", "1");
+			map.put("name", "张三");
+			map.put("age", "30");
+			map.put("email", "xxx@xxx.com");
+			return map;
+
+		}
+		
+		
+		@JSONFieldMap(type="MAPLIST",include = "name,email")
+		@RequestMapping(value = "/maplist", method = RequestMethod.GET)
+		public Object maplist() {
+			List<Map<String, String>> maplist=new ArrayList<Map<String,String>>();
+			for (int i=0;i<10;i++){
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("id", i+"");
+				map.put("name", "张三"+i);
+				map.put("age", "30");
+				map.put("email", "xxx@xxx.com");
+				maplist.add(map);
+			}
+			
+			return maplist;
+
+		}
+		
+		
+		@JSONFieldMap(type="MAPLIST",filter = "id")
+		@RequestMapping(value = "/maplist2", method = RequestMethod.GET)
+		public Object maplist2() {
+			List<Map<String, String>> maplist=new ArrayList<Map<String,String>>();
+			for (int i=0;i<10;i++){
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("id", i+"");
+				map.put("name", "张三"+i);
+				map.put("age", "30");
+				map.put("email", "xxx@xxx.com");
+				maplist.add(map);
+			}
+			
+			return maplist;
+
+		}
+		
+		
+		
 
 }

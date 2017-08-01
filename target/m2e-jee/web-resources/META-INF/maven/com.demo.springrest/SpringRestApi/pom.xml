@@ -101,6 +101,16 @@
 		<!-- SPRING end -->
 
 
+<!-- Spring自带mock测试Controller -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-mock</artifactId>
+    <version>2.0.8</version>
+    <scope>test</scope>
+</dependency>
+
+
+
   <!-- jackson start -->
   <dependency>
    <groupId>org.codehaus.jackson</groupId>
